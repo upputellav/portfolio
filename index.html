@@ -1,0 +1,432 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Upputella Veena — UI/UX Portfolio</title>
+  <meta name="description" content="Upputella Veena — UI/UX Designer | Figma + Frontend (HTML/CSS/JS)" />
+  <style>
+    :root{
+      --bg:#f7f9fb;
+      --card:#ffffff;
+      --ink:#0e1b2a;
+      --muted:#53606a;
+      --brand:#0a6847;
+      --accent:#12a57b;
+      --glass: rgba(255,255,255,0.6);
+      --shadow: 0 8px 26px rgba(12,20,30,0.08);
+    }
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+      background:var(--bg);
+      color:var(--muted);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+    }
+
+    /* NAV */
+    .nav{
+      position:sticky; top:0; z-index:1000;
+      backdrop-filter: blur(8px) saturate(130%);
+      background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.72));
+      border-bottom: 1px solid rgba(10,20,30,0.04);
+      box-shadow: 0 2px 0 rgba(12,20,30,0.02);
+    }
+    .nav-inner{max-width:1100px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:12px 20px}
+    .brand{font-weight:800;color:var(--ink);letter-spacing:0.3px}
+    .nav-links{display:flex;gap:18px}
+    .nav-links a{color:var(--ink);text-decoration:none;font-weight:600;opacity:.86}
+    .nav-links a:hover{color:var(--brand);opacity:1}
+    .resume-btn{background:var(--brand);color:#fff;padding:8px 12px;border-radius:10px;text-decoration:none;font-weight:700;box-shadow: 0 6px 18px rgba(10,104,71,0.14)}
+
+    /* HERO */
+    .hero{background:linear-gradient(120deg,#eaf6f1 0%, #fff 45%, #f1fbf8 100%);padding:84px 16px 56px;border-bottom-left-radius:48px;border-bottom-right-radius:48px}
+    .hero-inner{max-width:1100px;margin:auto;display:grid;grid-template-columns:1.2fr .8fr;gap:32px;align-items:center}
+    .kicker{display:inline-block;padding:6px 10px;border-radius:10px;background:rgba(10,104,71,0.08);color:var(--brand);font-weight:800;font-size:.85rem}
+    h1{margin:.5rem 0 .6rem;font-size:clamp(1.8rem,2.6vw,2.6rem);color:var(--ink);line-height:1.06}
+    .lead{font-size:1rem;color:var(--muted);max-width:62ch}
+    .hero-cta{margin-top:18px;display:flex;gap:12px}
+    .btn{border:0;padding:10px 14px;border-radius:12px;font-weight:700;cursor:pointer}
+    .btn-primary{background:var(--brand);color:#fff}
+    .btn-ghost{background:transparent;border:1px solid rgba(10,104,71,0.14);color:var(--brand)}
+
+    /* QUICK FACTS CARD */
+    .quick-card{background:var(--card);padding:18px;border-radius:14px;box-shadow:var(--shadow)}
+    .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+    .chip{background:linear-gradient(180deg,#ecf9f4,#dff4ec);color:var(--brand);padding:6px 10px;border-radius:999px;font-weight:700;font-size:.85rem}
+
+    /* SECTION BASE */
+    section{padding:64px 16px}
+    .container{max-width:1100px;margin:auto}
+    .section-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:18px}
+    .section-title{font-size:1.4rem;color:var(--ink);margin:0}
+    .section-sub{color:#7f8a90;font-size:.95rem}
+
+    /* GRID */
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
+    .col-6{grid-column:span 6}
+    .col-4{grid-column:span 4}
+    .col-12{grid-column:span 12}
+    @media (max-width:920px){.hero-inner{grid-template-columns:1fr}.col-6,.col-4{grid-column:span 12}}
+
+    /* CARDS */
+    .card{background:var(--card);border-radius:14px;padding:18px;box-shadow:var(--shadow);transition:transform .24s ease,box-shadow .24s ease}
+    .card:hover{transform:translateY(-8px);box-shadow:0 18px 40px rgba(6,18,32,0.12)}
+    .card h3{margin:.2rem 0 .4rem;color:var(--ink)}
+    .meta{font-size:.92rem;color:var(--muted);opacity:.95}
+
+    /* PROJECTS - thumbnails / device mockups */
+    .projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    @media (max-width:920px){.projects-grid{grid-template-columns:repeat(1,1fr)}}
+    .project-card{padding:14px;border-radius:12px;overflow:hidden}
+    .thumb-wrap{position:relative;border-radius:12px;overflow:hidden;background:linear-gradient(135deg,#e6fbf4,#f8fff9);display:flex;align-items:center;justify-content:center;height:180px}
+    .thumb-wrap img{width:100%;height:100%;object-fit:cover;display:block}
+    .project-actions{display:flex;gap:10px;margin-top:12px}
+    .btn-sm{padding:8px 12px;border-radius:10px;font-weight:700;border:0;cursor:pointer}
+    .btn-live{background:var(--brand);color:#fff}
+    .btn-figma{background:transparent;border:2px solid rgba(10,104,71,0.08);color:var(--brand)}
+
+    /* Figma previews styled as device mockups */
+    .device{background:linear-gradient(180deg,#fff,#fbfffd);border-radius:12px;padding:10px;display:flex;align-items:center;justify-content:center;height:180px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.6)}
+    .device .screen{width:100%;height:100%;border-radius:8px;overflow:hidden}
+    .device .screen img{width:100%;height:100%;object-fit:cover}
+
+    /* FIGMA SUBSECTION */
+    .figma-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    @media (max-width:920px){.figma-grid{grid-template-columns:1fr}}
+    .figma-card{padding:12px;border-radius:12px;background:linear-gradient(180deg,#fff,#fbfffe);box-shadow:var(--shadow);display:flex;flex-direction:column;align-items:stretch}
+    .figma-thumb{height:160px;border-radius:8px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#f1f9f6,#eefef6)}
+    .figma-thumb img{width:100%;height:100%;object-fit:cover}
+
+    /* SKILLS */
+    .skills{display:flex;flex-wrap:wrap;gap:10px}
+    .skill-badge{background:#f1fbf6;padding:8px 12px;border-radius:999px;color:var(--brand);font-weight:700}
+
+    /* TIMELINE */
+    .timeline{position:relative;padding-left:28px}
+    .timeline::before{content:'';position:absolute;left:8px;top:6px;bottom:6px;width:2px;background:#e9eef2;border-radius:2px}
+    .timeline-item{position:relative;margin-bottom:22px;padding-left:14px}
+    .timeline-item::before{content:'';position:absolute;left:-8px;top:6px;width:12px;height:12px;border-radius:999px;background:var(--brand)}
+
+    /* CONTACT */
+    .contact-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+    @media (max-width:920px){.contact-grid{grid-template-columns:1fr}}
+    .contact-card a{color:var(--brand);text-decoration:none;font-weight:700}
+    .contact-card a:hover{text-decoration:underline}
+
+    /* Reveal animations */
+    .reveal{opacity:0;transform:translateY(10px);animation:reveal .6s ease forwards}
+    @keyframes reveal{to{opacity:1;transform:none}}
+
+    /* small helpers */
+    .muted{color:#768089;font-size:.95rem}
+    footer{padding:30px 16px;text-align:center;color:#8b98a1}
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="brand">Upputella Veena</div>
+      <div style="display:flex;align-items:center;gap:18px">
+        <div class="nav-links">
+          <a href="#about">About</a>
+          <a href="#projects">Projects</a>
+          <a href="#skills">Skills</a>
+          <a href="#education">Education</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <a class="resume-btn" href="#" onclick="alert('Replace this with a resume download link');return false;">Download Resume</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO / ABOUT -->
+  <header class="hero" id="about">
+    <div class="hero-inner container">
+      <div>
+        <div class="kicker">UI/UX Designer • Frontend</div>
+        <h1>Detail-oriented and creative Software Engineer specializing in UI/UX design & responsive frontends.</h1>
+        <p class="lead">I turn complex workflows into usable flows, wireframes and polished interfaces — then implement them with clean HTML/CSS and JavaScript. Comfortable with Figma, ProtoPie, and Adobe Photoshop.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#projects">See Projects</a>
+          <a class="btn btn-ghost" href="#contact">Get in touch</a>
+        </div>
+      </div>
+
+      <aside class="quick-card">
+        <h4 style="margin:0 0 8px;color:var(--ink)">Quick Facts</h4>
+        <div class="muted">Hyderabad, India • Open to UI/UX roles</div>
+        <div class="chips" aria-hidden="true">
+          <div class="chip">Figma</div>
+          <div class="chip">HTML</div>
+          <div class="chip">CSS</div>
+          <div class="chip">JavaScript</div>
+          <div class="chip">Photoshop</div>
+        </div>
+        <p style="margin-top:12px;font-size:.95rem;color:var(--muted)">Email: <a href="mailto:upputellav@gmail.com">upputellav@gmail.com</a></p>
+      </aside>
+    </div>
+  </header>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="container">
+      <div class="section-head">
+        <h3 class="section-title">Selected Projects</h3>
+        <div class="section-sub">Live websites + Figma previews</div>
+      </div>
+
+      <!-- Web / Live Projects -->
+      <div class="grid" style="margin-bottom:18px">
+        <div class="col-4">
+          <article class="card project-card reveal">
+            <div class="thumb-wrap">
+              <!-- replace placeholder with screenshot -->
+              <img src="https://via.placeholder.com/900x500?text=Careaxes+Screenshot" alt="Careaxes screenshot">
+            </div>
+            <h3>Careaxes – Healthcare Management</h3>
+            <div class="meta">Figma • HTML • CSS • Bootstrap • JS</div>
+            <p style="margin-top:10px">Responsive UI for healthcare workflows, improved navigation and reporting for clinicians and admins.</p>
+            <div class="project-actions">
+              <button class="btn-sm btn-live" onclick="window.open('https://careaxes.com/','_blank')">Open Site</button>
+              <button class="btn-sm btn-figma" onclick="window.open('https://www.figma.com/@uveena','_blank')">View on Figma</button>
+            </div>
+          </article>
+        </div>
+
+        <div class="col-4">
+          <article class="card project-card reveal" style="animation-delay:.06s">
+            <div class="thumb-wrap">
+              <img src="https://via.placeholder.com/900x500?text=Fernandez+Intranet" alt="Fernandez screenshot">
+            </div>
+            <h3>Fernandez Hospital — Intranet</h3>
+            <div class="meta">Figma • HTML • CSS • Print-friendly</div>
+            <p style="margin-top:10px">Designed staff dashboards and print-friendly patient reports, reducing data-entry friction.</p>
+            <div class="project-actions">
+              <button class="btn-sm btn-live" onclick="window.open('https://infonet.fernandezhospital.com/Home/Index','_blank')">Open Site</button>
+              <button class="btn-sm btn-figma" onclick="window.open('https://www.figma.com/@uveena','_blank')">View on Figma</button>
+            </div>
+          </article>
+        </div>
+
+        <div class="col-4">
+          <article class="card project-card reveal" style="animation-delay:.12s">
+            <div class="thumb-wrap">
+              <img src="https://via.placeholder.com/900x500?text=MedicsCloud+EHR" alt="MedicsCloud screenshot">
+            </div>
+            <h3>MedicsCloud EHR — Interface Concepts</h3>
+            <div class="meta">Figma • ProtoPie • HTML • CSS</div>
+            <p style="margin-top:10px">Prototyped scheduling and charting flows to improve clinician efficiency and data access.</p>
+            <div class="project-actions">
+              <button class="btn-sm btn-live" onclick="window.open('https://www.adsc.com/electronic-health-records-software','_blank')">Learn More</button>
+              <button class="btn-sm btn-figma" onclick="window.open('https://www.figma.com/@uveena','_blank')">View on Figma</button>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- Figma Projects subsection -->
+      <div style="margin-top:28px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+          <h4 style="margin:0;color:var(--ink)">Figma Project Previews</h4>
+          <div class="muted">Thumbnails — click to open the prototype in Figma</div>
+        </div>
+
+        <div class="figma-grid">
+          <!-- Figma project 1 -->
+          <article class="figma-card reveal">
+            <div class="figma-thumb">
+              <!-- replace placeholder with small Figma screenshot -->
+              <img src="https://via.placeholder.com/600x360?text=Figma+Project+1" alt="Figma project 1">
+            </div>
+            <h3 style="margin:.6rem 0 .2rem">Mobile App UI Kit</h3>
+            <div class="meta">Design system, component library, and flows</div>
+            <p style="margin-top:8px">Reusable components and tokens for fast iteration across screens.</p>
+            <div style="margin-top:auto;display:flex;gap:10px">
+              <button class="btn-sm btn-figma" onclick="window.open('https://www.figma.com/@uveena','_blank')">View on Figma</button>
+              <!-- if you have a public prototype link, open it directly -->
+            </div>
+          </article>
+
+          <!-- Figma project 2 -->
+          <article class="figma-card reveal" style="animation-delay:.06s">
+            <div class="figma-thumb">
+              <img src="https://via.placeholder.com/600x360?text=Figma+Project+2" alt="Figma project 2">
+            </div>
+            <h3 style="margin:.6rem 0 .2rem">Healthcare Dashboard</h3>
+            <div class="meta">Patient record & clinician dashboard</div>
+            <p style="margin-top:8px">Focus on scanable information and quick actions for staff.</p>
+            <div style="margin-top:auto;display:flex;gap:10px">
+              <button class="btn-sm btn-figma" onclick="window.open('https://www.figma.com/@uveena','_blank')">View on Figma</button>
+            </div>
+          </article>
+
+          <!-- Figma project 3 -->
+          <article class="figma-card reveal" style="animation-delay:.12s">
+            <div class="figma-thumb">
+              <img src="https://via.placeholder.com/600x360?text=Figma+Project+3" alt="Figma project 3">
+            </div>
+            <h3 style="margin:.6rem 0 .2rem">E-Commerce UI</h3>
+            <div class="meta">Checkout & product flows</div>
+            <p style="margin-top:8px">Responsive product discovery and streamlined checkout UX.</p>
+            <div style="margin-top:auto;display:flex;gap:10px">
+              <button class="btn-sm btn-figma" onclick="window.open('https://www.figma.com/@uveena','_blank')">View on Figma</button>
+            </div>
+          </article>
+        </div>
+
+        <!-- Optional live embed (commented for safety / speed) -->
+        <!--
+        <div style="margin-top:18px" class="card">
+          <p class="muted" style="margin:0 0 12px">Live embed example — paste your public Figma prototype url into the src below:</p>
+          <div style="border-radius:10px;overflow:hidden;border:1px solid #e6eef2">
+            <iframe title="Figma prototype" style="width:100%;height:480px;border:0"
+              src="https://www.figma.com/embed?embed_host=share&url=YOUR_FIGMA_PUBLIC_LINK_HERE"
+              allowfullscreen>
+            </iframe>
+          </div>
+        </div>
+        -->
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" style="background:transparent">
+    <div class="container">
+      <div class="section-head">
+        <h3 class="section-title">Skills</h3>
+        <div class="section-sub">Design & front-end</div>
+      </div>
+      <div class="card reveal">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap">
+          <div style="flex:1">
+            <div style="margin-bottom:12px"><strong style="color:var(--ink)">Design</strong></div>
+            <div class="skills">
+              <div class="skill-badge">Figma</div>
+              <div class="skill-badge">ProtoPie</div>
+              <div class="skill-badge">Adobe Photoshop</div>
+              <div class="skill-badge">Wireframing</div>
+              <div class="skill-badge">Usability Testing</div>
+            </div>
+          </div>
+          <div style="flex:1">
+            <div style="margin-bottom:12px"><strong style="color:var(--ink)">Frontend</strong></div>
+            <div class="skills">
+              <div class="skill-badge">HTML</div>
+              <div class="skill-badge">CSS</div>
+              <div class="skill-badge">JavaScript</div>
+              <div class="skill-badge">Bootstrap</div>
+              <div class="skill-badge">Print-friendly Layouts</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="container">
+      <div class="section-head">
+        <h3 class="section-title">Education</h3>
+        <div class="section-sub">Academic background</div>
+      </div>
+
+      <div class="card reveal">
+        <div class="timeline">
+          <div class="timeline-item">
+            <h4 style="margin:.1rem 0 .2rem;color:var(--ink)">Bachelor of Engineering (ECE)</h4>
+            <div class="meta">Matrusri Engineering College, Osmania University • 2020–2023 • GPA: 7.5</div>
+          </div>
+
+          <div class="timeline-item">
+            <h4 style="margin:.1rem 0 .2rem;color:var(--ink)">Diploma in Electronics & Communication</h4>
+            <div class="meta">TKR College of Engineering & Technology • 2017–2020 • GPA: 7.9</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-head">
+        <h3 class="section-title">Contact</h3>
+        <div class="section-sub">Let's connect</div>
+      </div>
+
+      <div class="grid">
+        <div class="col-6">
+          <div class="card contact-card reveal">
+            <h4 style="margin:.2rem 0">Reach me</h4>
+            <p class="meta">Email: <a href="mailto:upputellav@gmail.com">upputellav@gmail.com</a></p>
+            <p class="meta">Mobile: <a href="tel:+919398658463">+91 93986 58463</a></p>
+            <p class="meta">LinkedIn: <a href="https://in.linkedin.com/in/upputella-veena" target="_blank">linkedin.com/in/upputella-veena</a></p>
+            <p class="meta">Figma: <a href="https://www.figma.com/@uveena" target="_blank">figma.com/@uveena</a></p>
+          </div>
+        </div>
+
+        <div class="col-6">
+          <div class="card reveal">
+            <h4 style="margin:.2rem 0">Quick message</h4>
+            <form onsubmit="event.preventDefault(); alert('Thanks — I will get back to you!');">
+              <div style="display:grid;gap:10px">
+                <input required placeholder="Your name" style="padding:12px;border:1px solid #e9eef2;border-radius:10px" />
+                <input type="email" required placeholder="Email" style="padding:12px;border:1px solid #e9eef2;border-radius:10px" />
+                <textarea required rows="4" placeholder="Message" style="padding:12px;border:1px solid #e9eef2;border-radius:10px"></textarea>
+                <button class="btn btn-primary" type="submit">Send message</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    © 2025 Upputella Veena • UI/UX Portfolio
+  </footer>
+
+  <script>
+    // Simple reveal on scroll
+    const revealEls = document.querySelectorAll('.reveal');
+    const onScrollReveal = () => {
+      const offset = window.innerHeight * 0.85;
+      revealEls.forEach((el, i) => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < offset) {
+          el.style.animationDelay = (i * 60) + 'ms';
+          el.classList.add('revealed');
+          el.style.opacity = 1;
+          el.style.transform = 'none';
+        }
+      });
+    };
+    // initialize reveal styles
+    revealEls.forEach(el => { el.style.opacity = 0; el.style.transform = 'translateY(10px)'; });
+    window.addEventListener('scroll', onScrollReveal);
+    window.addEventListener('load', onScrollReveal);
+
+    // Optional: add active link on scroll
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    const setActive = () => {
+      let index = sections.length;
+      while(--index && window.scrollY + 120 < sections[index].offsetTop) {}
+      navLinks.forEach((link) => link.classList.remove('active'));
+      if(navLinks[index]) navLinks[index].classList.add('active');
+    };
+    window.addEventListener('scroll', setActive);
+    window.addEventListener('load', setActive);
+  </script>
+</body>
+</html>
